@@ -1,0 +1,29 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="164" data-eid="V4v5">
+        一键管理插件    </h1>
+    
+    <p>FastAdmin中的插件可以通过命令行快速的进行安装、卸载、禁用和启用。</p><h3 id="准备工作-1">准备工作</h3><p>请确保你的FastAdmin已经能正常登录后台。</p><p>请确保php所在的目录已经加入到系统环境变量，否则会提示找不到该命令。</p><p>打开命令行控制台进入到你的站点根目录，也就是think文件所在的目录。</p><h3 id="常用命令-2">常用命令</h3><pre title=""><code class="language-php">//创建一个myaddon本地插件，常用于开发自己的插件时使用
+php think addon -a myaddon -c create
+//刷新插件缓存，如果禁用启用了插件，部分文件需要刷新才会生效
+php think addon -a example -c refresh
+//卸载本地的example插件
+php think addon -a example -c uninstall
+//启用本地的example插件
+php think addon -a example -c enable
+//禁用本地的example插件
+php think addon -a example -c disable
+//将本地的example插件打包成zip文件
+php think addon -a example -c package</code></pre><h3 id="常见问题-3">常见问题</h3><ol><li>付费插件请直接在后台<code>插件管理</code>或FastAdmin官方<a  href="https://www.fastadmin.net/store.html"  target="_blank">插件市场</a>下载，然后进行离线安装。</li><li>如果管理插件后不生效，请在后台右上角清除缓存重试。</li></ol><p>更多一键管理插件的参数请使用<code>php think addon --help</code>查看。</p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-07-31 08:12:06</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/163.html" data-id="163">一键生成API文档</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/165.html" data-id="165">其他命令</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

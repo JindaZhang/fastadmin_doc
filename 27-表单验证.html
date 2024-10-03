@@ -1,0 +1,47 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="179" data-eid="V4v5">
+        表单验证    </h1>
+    
+    <p>FastAdmin的表单验证采用的是<code>Nice-validator</code>验证插件，<code>Nice-validator</code>是一款非常强大的表单验证插件，通过简单在元素上配置规则，即可达到验证的效果。</p><h3 id="常规示例-1">常规示例</h3><p>在FastAdmin当中我们只需要给元素添加<code>data-rule=&quot;规则&quot;</code>即可开启<code>Nice-validator</code>的验证，如下：</p><pre title=""><code class="language-html">&lt;input id=&quot;c-title&quot; class=&quot;form-control&quot; data-rule=&quot;required;username&quot; name=&quot;row[title]&quot; type=&quot;text&quot; value=&quot;&quot; /&gt;</code></pre><h3 id="常用规则-2">常用规则</h3><p>常用的规则如下</p><table><thead><tr><th>规则</th><th>描述</th><th>示例</th></tr></thead><tbody><tr><td>required</td><td>字段必填</td><td>required</td></tr><tr><td>checked</td><td>必选，只适用于checkbox和radio</td><td>checked</td></tr><tr><td>match(name)</td><td>当前字段值必须和 name 字段的值匹配</td><td>match('row[username]')</td></tr><tr><td>remote(URL)</td><td>请求服务端验证</td><td>remote('validate/check_username_unique')</td></tr><tr><td>integer</td><td>整数</td><td>integer</td></tr><tr><td>range(n~)</td><td>数值范围, 请填写不小于 n 的数</td><td>range(3~)</td></tr><tr><td>length(n)</td><td>请填写 n 个字符</td><td>length(3)</td></tr><tr><td>filter</td><td>过滤 &lt;&gt;`"' 和字符实体编码的字符</td><td>filter</td></tr><tr><td>digits</td><td>必须为数字</td><td>digits</td></tr><tr><td>letters</td><td>必须为字母</td><td>letters</td></tr><tr><td>date</td><td>必须为日期,yyyy-mm-dd格式</td><td>date</td></tr><tr><td>time</td><td>必须为时间,hh:ii格式</td><td>time</td></tr><tr><td>email</td><td>必须为email格式</td><td>email</td></tr><tr><td>url</td><td>必须为URL链接</td><td>url</td></tr><tr><td>qq</td><td>必须为QQ号</td><td>qq</td></tr><tr><td>IDcard</td><td>必须为身份证号码</td><td>IDcard</td></tr><tr><td>tel</td><td>必须为电话号码</td><td>tel</td></tr><tr><td>mobile</td><td>必须为手机号码</td><td>mobile</td></tr><tr><td>zipcode</td><td>必须为邮编</td><td>zipcode</td></tr><tr><td>chinese</td><td>必须为中文字符</td><td>chinese</td></tr><tr><td>username</td><td>必须为3-12位数字、字母、下划线</td><td>username</td></tr><tr><td>password</td><td>必须为6-16位字符，不能有空格</td><td>password</td></tr></tbody></table><h3 id="自定义规则-3">自定义规则</h3><p>如果常用规则不满足我们的需求，我们可以采用自定义规则来实现，如下：</p><pre title=""><code class="language-html">&lt;input id=&quot;c-title&quot; class=&quot;form-control&quot; data-rule=&quot;required;diyname&quot; name=&quot;row[title]&quot; type=&quot;text&quot; value=&quot;&quot; /&gt;</code></pre><p>然后我们在JS中定义规则的实现方法，如下：</p><pre title=""><code class="language-js">$.validator.config({
+    rules: {
+        diyname: function (element) {
+            //如果直接返回文本，则表示失败的提示文字
+            //如果返回true表示成功
+            //如果返回Ajax对象则表示远程验证
+            if (element.value.toString().match(/^\d+$/)) {
+                return '不能为纯数字';
+            }
+            if (!element.value.toString().match(/^[a-zA-Z0-9\-_]+$/)) {
+                return '请输入字母或数字组合';
+            }
+            return $.ajax({
+                url: 'ajax/check',
+                type: 'POST',
+                data: {id: $(&quot;#c-title&quot;).val(), name: element.name, value: element.value},
+                dataType: 'json'
+            });
+        }
+    }
+});</code></pre><p>然后我们需要在服务端控制器的<code>check</code>方法返回</p><pre title=""><code class="language-php">$result = &quot;验证结果&quot;;
+if ($result) {
+    //失败
+    $this-&gt;error(&quot;用户名已经存在&quot;);
+} else {
+    //成功
+    $this-&gt;success();
+}</code></pre><h3 id="忽略验证-4">忽略验证</h3><p>因为引入了<code>Nice-validator</code>后会对所有表单的所有元素进行验证，如果你的表单不希望使用<code>Nice-validator</code>组件进行验证，可以给<code>form</code>添加一个<code>novalidate</code>属性即可，如</p><pre title=""><code class="language-html">&lt;form novalidate&gt;
+    ......
+&lt;/form&gt;</code></pre><p>同时如果JS中有使用<code>Form.api.bindevent($(&quot;form[role=form]&quot;));</code>，也需要将该行移除。</p><h3 id="温馨提示-5">温馨提示</h3><blockquote>更多的使用方法请参考<a  href="https://www.fastadmin.net/outlink.html?url=https%3A%2F%2Fvalidator.niceue.com%2Fdocs%2F"  target="_blank"  rel="nofollow">Nice-validator官方教程</a></blockquote>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-07-31 08:12:06</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/178.html" data-id="178">动态下拉(SelectPage)</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/180.html" data-id="180">城市选择</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

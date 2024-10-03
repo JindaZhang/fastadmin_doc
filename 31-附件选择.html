@@ -1,0 +1,19 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="183" data-eid="V4v5">
+        附件选择    </h1>
+    
+    <p><code>FastAdmin</code>中拥有强大的附件选择功能，可以很方便的给文本框添加一个按钮或链接来快速使用附件选择功能。</p><h3 id="常规示例-1">常规示例</h3><p>通常情况下我们只需要给按钮或链接添加一个<code>faselect</code>的<code>class</code>即可实现附件选择的功能，如下：</p><pre title=""><code class="language-html">&lt;input type=&quot;text&quot; id=&quot;c-file&quot; class=&quot;form-control&quot; /&gt;
+&lt;a href=&quot;javascript:&quot; class=&quot;btn btn-info faselect&quot; data-input-id=&quot;c-file&quot; data-mimetype=&quot;image/*&quot; data-multiple=&quot;false&quot;&gt;选择附件&lt;/a&gt;</code></pre><h3 id="常用属性-2">常用属性</h3><p>首先需要给你的元素添加一个<code>faselect</code>的<code>class</code>样式名，其次可以添加以下的属性</p><table><thead><tr><th>属性</th><th>说明</th><th>示例</th></tr></thead><tbody><tr><td>data-multiple</td><td>是否选择多个</td><td>data-multiple="true"</td></tr><tr><td>data-mimetype</td><td>筛选指定的类型</td><td>data-mimetype="image/png"</td></tr><tr><td>data-user-id</td><td>筛选指定用户ID的数据</td><td>data-user-id="1"</td></tr><tr><td>data-admin-id</td><td>筛选指定管理员ID的数据</td><td>data-admin-id="1"</td></tr><tr><td>data-maxcount</td><td>最大的可选择数</td><td>data-maxcount="3"</td></tr><tr><td>data-input-id</td><td>选中后填充的文本框，对应ID的文本框必须存在</td><td>data-input-id="c-file"</td></tr></tbody></table><h3 id="事件绑定-3">事件绑定</h3><p>如果你的附件选择按钮是动态生成的，你需要使用<code>Form.events.faselect(&quot;按钮父元素&quot;);</code>进行绑定相关的事件。</p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-07-31 08:12:06</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/182.html" data-id="182">下拉列表</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/184.html" data-id="184">键值组件(Fieldlist)</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

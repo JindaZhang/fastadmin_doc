@@ -1,0 +1,44 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="170" data-eid="V4v5">
+        代码安全    </h1>
+    
+    <p>开发安全是我们在开发过程中很容易忽略的一个环节，由于程序的不严谨很容易数据泄漏、数据丢失、服务器被提权，因此我们在开发过程中就要尽量做到开发规范严谨，接下来主要讲解下在开发过程中要注意避免产生BUG的几种情形</p><h3 id="SQL注入-1">SQL注入</h3><p>这种问题常常出现在读写操作数据库时产生，很多时候我们需要查询数据库的数据做逻辑操作，由于未对请求的参数做过滤或处理，很容易产生数据丢失和数据泄漏的问题。</p><p>例如，我们需要根据用户名查询指定用户的信息，我们常用的SQL语句如下：</p><pre title=""><code class="language-php">$username = $this-&gt;request-&gt;request(&quot;username&quot;);
+\think\Db::query(&quot;SELECT * FROM fa_user WHERE username='{$username}'&quot;);</code></pre><p>一般情况下我们<code>username</code>参数传普通参数都不会有问题，但是如果遇到别有用心之人传一些特殊参数，例如传递<code>username</code>的参数为</p><pre title=""><code>http://www.yoursite.com/test/index?username=' OR '1'='1</code></pre><p>此时我们接收到的<code>username</code>为<code>' OR '1'='1</code>，生成的SQL语句为</p><pre title=""><code class="language-sql">SELECT * FROM fa_user WHERE username='' OR '1'='1'</code></pre><p>此时将导致筛选所有数据或筛选我们任意想要的数据。</p><p>那如何避免这种情况发生呢？我们有以下几种解决方法</p><p>1、使用参数预处理</p><pre title=""><code>$username = $this-&gt;request-&gt;request(&quot;username&quot;, &quot;&quot;);
+$username = htmlspecialchars($username, ENT_QUOTES);
+\think\Db::query(&quot;SELECT * FROM fa_user WHERE username=:username&quot;, ['username'=&gt;$username]);</code></pre><p>2、使用模型的自带的查询方法进行查询</p><pre title=""><code class="language-php">$username = $this-&gt;request-&gt;request(&quot;username&quot;, &quot;&quot;);
+$username = htmlspecialchars($username, ENT_QUOTES);
+//方法1
+\app\common\model\User::getByUsername($username);
+//方法2
+\app\common\model\User::where('username', $username)-&gt;find();</code></pre><p>在ThinkPHP5中提供了许多数据输入过滤方法，例如</p><pre title=""><code class="language-php">//强制转换为Email格式
+$this-&gt;request-&gt;post('email','',FILTER_VALIDATE_EMAIL);
+$this-&gt;request-&gt;post('email','','email');
+//强制转换为数字
+$this-&gt;request-&gt;post('id/d','0');</code></pre><p>FastAdmin从<code>1.2.0</code>版本开始已经内置了<code>xss_clean</code>函数用于清除过滤请求中可能的危险字段，可以搭配其它过滤方式一同使用，如</p><pre title=""><code class="language-php">$this-&gt;request-&gt;post('title/s','','trim,strip_tags,htmlspecialchars,xss_clean');</code></pre><p>常用的修饰符如下</p><table><thead><tr><th align="left">修饰符</th><th align="left">作用                </th></tr></thead><tbody><tr><td align="left">s      </td><td align="left">强制转换为字符串类型</td></tr><tr><td align="left">d      </td><td align="left">强制转换为整型类型  </td></tr><tr><td align="left">b      </td><td align="left">强制转换为布尔类型  </td></tr><tr><td align="left">a      </td><td align="left">强制转换为数组类型  </td></tr><tr><td align="left">f      </td><td align="left">强制转换为浮点类型  </td></tr></tbody></table><h3 id="XSS跨站注入-2">XSS跨站注入</h3><p>XSS跨站点脚本注入常常出现在浏览器客户端输出时由于未对输出的数据进行过滤和转换，导致浏览器响应执行了Javascript代码，这个代码代具有管理员权限的用户做一些隐藏的操作，比如提权、恶意修改删除数据，甚至将用户当前浏览器端的Cookie等数据传到攻击者的服务器，攻击者通过伪造Cookie请求，很容易造成用户信息漏洞和数据丢失的情况。这种问题常出现在会员昵称、会员头像输出、会员评论数据等情况下。</p><p>解决防范XSS跨站注入的首先是按照上方的SQL注入做好请求数据过滤，其次是做好数据输出时的编码，我们在视图模板中编写代码时，可以通过添加<code>htmlentities</code>对HTML代码做实体编码，例如</p><pre title=""><code class="language-html">&lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;{$username|htmlentities}&quot; /&gt;</code></pre><p>千万不要直接使用以下的代码，以下代码都是非常不安全的</p><pre title=""><code class="language-html">&lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;{$Think.get.username}&quot; /&gt;
+或
+&lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;{$_GET['username']}&quot; /&gt;</code></pre><h3 id="CSRF跨站请求-3">CSRF跨站请求</h3><p>CSRF全称为<code>cross site request forgery</code>，中文意思为：<code>跨站点伪装请求</code>。</p><p>跨站点请求的原理就是<code>用户A</code>在<code>站点1</code>发布上传粘贴了一个<code>站点2</code>的URL，<code>用户B</code>不明就里的点击了<code>站点2</code>的URL，而这个URL因为是伪装请求<code>站点1</code>修改密码(其它危险请求)的操作。此时<code>用户A</code>就已经获取了<code>用户B</code>的账户信息。</p><p>例如我们常常在编写表单提交的时候都是如下的写法</p><pre title=""><code class="language-html">&lt;form action=&quot;&quot;&gt;
+&lt;input type=&quot;password&quot; name=&quot;newpassword&quot; /&gt;
+&lt;input type=&quot;submit&quot; /&gt;
+&lt;/form&gt;</code></pre><p>以上的写法很容易产生CSRF跨站点伪装请求。</p><p>在ThinkPHP5可以很方便的使用<code>token</code>的方式来防范这种威胁，比如我们将上面的代码改写为</p><pre title=""><code class="language-html">&lt;form action=&quot;&quot;&gt;
+{:token()}
+&lt;input type=&quot;password&quot; name=&quot;newpassword&quot; /&gt;
+&lt;input type=&quot;submit&quot; /&gt;
+&lt;/form&gt;</code></pre><p>我们添加了一个<code>{:token()}</code>，由于这个token是我们服务端动态输出的，伪装者的服务器没法获取该值，此时我们再做好服务端验证这个<code>token</code>是否有效即可，常用的方法如下</p><pre title=""><code class="language-php"> $token = $this-&gt;request-&gt;post('__token__');
+
+//验证Token
+if (!$token || !\think\Validate::is($token, &quot;token&quot;, ['__token__' =&gt; $token])) {
+        $this-&gt;error(&quot;请勿非法请求&quot;);
+}</code></pre><p>更多Token表单令牌的使用方法可以参考ThinkPHP5官方文档：<a href="https://www.fastadmin.net/outlink.html?url=https%3A%2F%2Fwww.kancloud.cn%2Fmanual%2Fthinkphp5%2F193918" target="_blank" rel="nofollow">https://www.kancloud.cn/manual/thinkphp5/193918</a></p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-07-31 08:12:06</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/security.html" data-id="157">安全建议</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/171.html" data-id="171">服务器安全</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

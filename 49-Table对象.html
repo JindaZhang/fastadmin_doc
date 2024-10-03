@@ -1,0 +1,25 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="197" data-eid="V4v5">
+        Table对象    </h1>
+    
+    <p>我们引入表格依赖<code>table</code>后，就可以通过<code>Table</code>来进行相关表格的初始化和绑定相关事件。<br>返回的<code>Table</code>对象包括以下几个对象：</p><pre title=""><code class="language-js">{
+    list:[], //实例化的表格对象列表
+    defaults:{}, //默认表格参数
+    columnDefaults:{}, //默认列参数
+    config:{}, //相关按钮的DOM选择类
+    button:{}, //默认编辑、删除、排序按钮配置
+    api:{} //封装的API方法
+}</code></pre><h3 id="Table.list-1">Table.list</h3><p>其中<code>Table.list</code>存储的是表格实例化后的对象。比如我们实例化的表格有个<code>id=&quot;mytable&quot;</code>的属性，则我们可以通过</p><pre title=""><code class="language-js">Table.list['mytable']</code></pre><p>来获取此表格的<code>Bootstrap-table</code>的对象。</p><h3 id="Table.defaults-2">Table.defaults</h3><p><code>Table.defaults</code>是指<code>Bootstrap-table</code>表格参数默认值。修改单一的值，我们可以直接通过</p><pre title=""><code class="language-js">Table.defaults.showExport = false;</code></pre><p>来进行修改</p><h3 id="Table.columnDefaults-3">Table.columnDefaults</h3><p><code>Table.columnDefaults</code>是指<code>Bootstrap-table</code>表格列参数默认值修改单一的值，我们可以直接通过</p><pre title=""><code class="language-js">Table.columnDefaults.align = 'left';</code></pre><p>来进行修改</p><h3 id="Table.config-4">Table.config</h3><p><code>Table.config</code>是指表格使用到的按钮和工具栏的DOM选择类，一般情况下不建议修改。</p><h3 id="Table.button-5">Table.button</h3><p><code>Table.button</code>是指表格默认编辑、删除、挺拽按钮的配置信息，一般情况下不建议修改。</p><h3 id="Table.api-6">Table.api</h3><p><code>Table.api</code>封装了表格常用的方法、单元格事件及渲染方法。在表格中会经常使用到。</p><blockquote>Table.api.init(defaults, columnDefaults, locales) //此方法用于初始化表格默认配置、表格列配置、写入语言包等操作<br>Table.api.bindevent(table) //此方法用于为表格中的元素绑定相关事件<br>Table.api.multi(action, ids, table, element) //此方法常用于批量操作请求，内部使用<br>Table.api.events.operate //操作栏单元格方法<br>Table.api.events.image //图片栏单元格方法<br>Table.api.formatter //格式化方法，后面单独介绍<br>Table.api.buttonlink(column, buttons, value, row, index, type) //按钮链接生成，内部使用<br>Table.api.replaceurl(url, row, table) //替换URL中的数据<br>Table.api.selectedids(table) //获取选中的条目ID集合<br>Table.api.toggleattr(table) //切换复选框状态<br>Table.api.getrowdata(table, index) //根据行索引获取行数据<br>Table.api.getrowbyindex(table, index) //根据行索引获取行数据<br>Table.api.getrowbyid(table, id) //根据主键ID获取行数据</blockquote><h3 id="Table.api.formatter-7">Table.api.formatter</h3><p><code>Table.api.formatter</code>封装了许多FastAdmin表格列表中常用的单元格数据渲染的方法，具体请参考<code>格式化</code>文章章节。</p><blockquote>Table.api.formatter.icon //渲染成图标按钮<br>Table.api.formatter.image //渲染成单张图片<br>Table.api.formatter.images //渲染成多张图片<br>Table.api.formatter.content //内容自动截取<br>Table.api.formatter.status //渲染成状态<br>Table.api.formatter.normal //渲染成label<br>Table.api.formatter.toggle //渲染成开关<br>Table.api.formatter.url //渲染成文本框链接<br>Table.api.formatter.search //渲染成搜索链接<br>Table.api.formatter.addtabs //渲染成打开新选项卡链接<br>Table.api.formatter.dialog //渲染成弹窗链接<br>Table.api.formatter.flag //渲染成标志<br>Table.api.formatter.label //渲染成标志<br>Table.api.formatter.datetime //渲染成日期时间<br>Table.api.formatter.operate //渲染成操作栏按钮<br>Table.api.formatter.buttons //渲染成按钮组</blockquote>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-07-31 08:12:06</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/196.html" data-id="196">依赖</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/1262.html" data-id="1262">扩展</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

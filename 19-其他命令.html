@@ -1,0 +1,29 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="165" data-eid="V4v5">
+        其他命令    </h1>
+    
+    <h3 id="一键安装 FastAdmin-1">一键安装 FastAdmin</h3><p>FastAdmin 不仅提供了 Web 在线安装方式，也可以在命令行使用命令快速的一键安装或重新安装。</p><h3 id="准备工作-2">准备工作</h3><p>请确保你的数据库存储引擎支持<code>innodb</code>引擎，如果不支持将无法正常安装FastAdmin。</p><p>请确保php所在的目录已经加入到系统环境变量，否则会提示找不到该命令。</p><p>打开命令行控制台进入到你的站点根目录，也就是think文件所在的目录。</p><h3 id="常用命令-3">常用命令</h3><pre title=""><code class="language-php">//一键安装FastAdmin
+php think install
+//配置数据库连接地址为127.0.0.1
+php think install -a 127.0.0.1
+//配置数据库用户名密码
+php think install -u root -p 123456
+//配置数据库表名为dbname
+php think install -d dbname
+//配置数据库表前缀为ff_
+php think install -r ff_
+//强制重新安装FastAdmin
+php think install -f 1</code></pre><h3 id="登录后台-4">登录后台</h3><p>为了安全，执行安装命令后会在<code>public</code>目录生成随机后台入口，请通过随机后台入口登录管理后台。</p><h3 id="常见问题-5">常见问题</h3><p>更多一键安装FastAdmin的参数请使用<code>php think install --help</code>查看。</p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-07-31 08:12:06</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/164.html" data-id="164">一键管理插件</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/language.html" data-id="151">多语言</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

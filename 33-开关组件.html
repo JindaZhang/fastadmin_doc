@@ -1,0 +1,45 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="185" data-eid="V4v5">
+        开关组件    </h1>
+    
+    <p>开关组件常用于状态值的变更或只有两个值的切换。</p><h3 id="常用示例-1">常用示例</h3><p>使用开关组件只需要给我们的操作按钮添加<code>data-toggle=&quot;switcher&quot;</code>即可，如下：</p><pre title=""><code class="language-html">&lt;!-- 根据变量值判断 --&gt;
+&lt;input  id=&quot;c-switch&quot; name=&quot;row[switch]&quot; type=&quot;hidden&quot; value=&quot;{$row.switch}&quot;&gt;
+&lt;a href=&quot;javascript:;&quot; data-toggle=&quot;switcher&quot; class=&quot;btn-switcher&quot; data-input-id=&quot;c-switch&quot; data-yes=&quot;1&quot; data-no=&quot;0&quot; &gt;
+&lt;i class=&quot;fa fa-toggle-on text-success {eq name=&quot;$row.switch&quot; value=&quot;0&quot;}fa-flip-horizontal text-gray{/eq} fa-2x&quot;&gt;&lt;/i&gt;
+&lt;/a&gt;
+
+&lt;!-- 默认开 --&gt;
+&lt;input  id=&quot;c-switch&quot; name=&quot;row[switch]&quot; type=&quot;hidden&quot; value=&quot;1&quot;&gt;
+&lt;a href=&quot;javascript:;&quot; data-toggle=&quot;switcher&quot; class=&quot;btn-switcher&quot; data-input-id=&quot;c-switch&quot; data-yes=&quot;1&quot; data-no=&quot;0&quot; &gt;
+&lt;i class=&quot;fa fa-toggle-on text-success fa-2x&quot;&gt;&lt;/i&gt;
+&lt;/a&gt;
+
+&lt;!-- 默认关 --&gt;
+&lt;input  id=&quot;c-switch&quot; name=&quot;row[switch]&quot; type=&quot;hidden&quot; value=&quot;0&quot;&gt;
+&lt;a href=&quot;javascript:;&quot; data-toggle=&quot;switcher&quot; class=&quot;btn-switcher&quot; data-input-id=&quot;c-switch&quot; data-yes=&quot;1&quot; data-no=&quot;0&quot; &gt;
+&lt;i class=&quot;fa fa-toggle-on text-success fa-flip-horizontal text-gray fa-2x&quot;&gt;&lt;/i&gt;
+&lt;/a&gt;</code></pre><h3 id="自定义值-2">自定义值</h3><p>如果你的开关的值不是<code>1</code>和<code>0</code>，则可以通过<code>data-yes</code>和<code>data-no</code>属性来指定开关的值，如下：</p><pre title=""><code class="language-html">&lt;input  id=&quot;c-switch&quot; name=&quot;row[switch]&quot; type=&quot;hidden&quot; value=&quot;open&quot;&gt;
+&lt;a href=&quot;javascript:;&quot; data-toggle=&quot;switcher&quot; class=&quot;btn-switcher&quot; data-input-id=&quot;c-switch&quot; data-yes=&quot;open&quot; data-no=&quot;closed&quot; &gt;
+&lt;i class=&quot;fa fa-toggle-on text-success {eq name=&quot;$row.switch&quot; value=&quot;closed&quot;}fa-flip-horizontal text-gray{/eq} fa-2x&quot;&gt;&lt;/i&gt;
+&lt;/a&gt;</code></pre><h3 id="开关提示-3">开关提示</h3><p>从<code>1.2.0</code>版本开始，开关组件支持切换前提示，请尝试给<code>a</code>标签添加一个<code>data-confirm</code>属性即可，如下：</p><pre title=""><code class="language-html">&lt;input  id=&quot;c-switch&quot; name=&quot;row[switch]&quot; type=&quot;hidden&quot; value=&quot;0&quot;&gt;
+&lt;a href=&quot;javascript:;&quot; data-toggle=&quot;switcher&quot; class=&quot;btn-switcher&quot; data-confirm=&quot;确认切换开关？&quot; data-input-id=&quot;c-switch&quot; data-yes=&quot;1&quot; data-no=&quot;0&quot; &gt;
+&lt;i class=&quot;fa fa-toggle-on text-success {eq name=&quot;$row.switch&quot; value=&quot;0&quot;}fa-flip-horizontal text-gray{/eq} fa-2x&quot;&gt;&lt;/i&gt;
+&lt;/a&gt;</code></pre><h3 id="开关事件-4">开关事件</h3><p>如果你需要监听开关切换后的事件，可以在JS中给隐藏的<code>input</code>文本框添加一个<code>change</code>事件，如下：</p><pre title=""><code class="language-js">$(document).on(&quot;change&quot;, &quot;#c-switch&quot;, function(){
+    //开关切换后的回调事件
+});</code></pre><h3 id="开关禁用-5">开关禁用</h3><p>如果需要禁用开关组件，只需要给<code>a</code>添加一个<code>disabled</code>的<code>class</code>即可，如下：</p><pre title=""><code class="language-html">&lt;input  id=&quot;c-switch&quot; name=&quot;row[switch]&quot; type=&quot;hidden&quot; value=&quot;0&quot;&gt;
+&lt;a href=&quot;javascript:;&quot; data-toggle=&quot;switcher&quot; class=&quot;btn-switcher disabled&quot; data-input-id=&quot;c-switch&quot; data-yes=&quot;1&quot; data-no=&quot;0&quot; &gt;
+&lt;i class=&quot;fa fa-toggle-on text-success {eq name=&quot;$row.switch&quot; value=&quot;0&quot;}fa-flip-horizontal text-gray{/eq} fa-2x&quot;&gt;&lt;/i&gt;
+&lt;/a&gt;</code></pre>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2024-02-08 15:45:52</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/184.html" data-id="184">键值组件(Fieldlist)</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/186.html" data-id="186">滑块组件</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

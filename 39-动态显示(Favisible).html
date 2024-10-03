@@ -1,0 +1,23 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="1253" data-eid="V4v5">
+        动态显示(Favisible)    </h1>
+    
+    <p>动态显示组件是<code>FastAdmin</code>开发的一个非常强大的按逻辑验证动态显示元素的组件，常用于一些组件的按需显示和联动显示，目前在<code>FastAdmin1.3.3+</code>版本支持该功能。</p><h3 id="功能特性-1">功能特性</h3><p>1、支持多操作符验证逻辑，目前支持<code>&gt;、&gt;=、&lt;、&lt;=、==、!=</code><br>2、支持正则验证逻辑<br>3、支持多条件验证，逻辑与<code>&amp;&amp;</code>逻辑或<code>||</code>条件验证支持</p><h3 id="使用方法-2">使用方法</h3><p>给你的表单中的需要按逻辑动态显示的元素添加<code>data-favisible=&quot;条件逻辑表达式&quot;</code>即可。<br>目前在<code>常规管理</code>-&gt;<code>系统配置</code>中<code>新增配置</code>可以直接使用</p><h3 id="条件逻辑表达式-3">条件逻辑表达式</h3><table><thead><tr><th>表达式</th><th>说明</th></tr></thead><tbody><tr><td>mode=basic</td><td>当表单中的<code>mode</code>组件值为<code>basic</code>时显示</td></tr><tr><td>mode=basic,advanced</td><td>当表单中的<code>mode</code>组件值为<code>basic</code>或<code>advanced</code>时显示</td></tr><tr><td>age&gt;=23</td><td>当表单中的<code>age</code>组件值大于等于23时显示</td></tr><tr><td>age=regex:/\d+/i</td><td>当表单中的<code>age</code>组件值匹配任意数字时显示</td></tr><tr><td>mode=basic&&type=hobby</td><td>当表单中的<code>mode</code>组件值为<code>basic</code>且<code>type</code>值为<code>hobby</code>时显示</td></tr><tr><td>mode=basic&#124;&#124;gender=male</td><td>当表单中的<code>mode</code>组件值为<code>basic</code>或<code>gender</code>值为<code>male</code>时显示</td></tr><tr><td>mode=basic&&name=Lily&#124;&#124;gender=male</td><td>当表单中的(<code>mode</code>组件值为<code>basic</code>且<code>name</code>为<code>Lily</code>) 或 <code>gender</code>值为<code>male</code>时显示</td></tr></tbody></table><h3 id="不支持的多条件表达式-4">不支持的多条件表达式</h3><pre title=""><code>mode=basic||gender=male&amp;&amp;mode=advanced||name=Lily</code></pre><p>以上逻辑表达式将按<code>或条件</code>拆分为3段，并不支持按<code>与条件</code>拆分为2段。</p><h3 id="使用示例-5">使用示例</h3><p>功能实现了点击单选按钮会根据选中的值显示对应的DIV元素</p><p>HTML代码</p><pre title=""><code>&lt;form id=&quot;demo-form&quot;&gt;
+    &lt;input type=&quot;radio&quot; name=&quot;row[type]&quot; value=&quot;value1&quot; checked /&gt; 类型1
+    &lt;input type=&quot;radio&quot; name=&quot;row[type]&quot; value=&quot;value2&quot; /&gt; 类型2
+    &lt;div data-favisible=&quot;type=value1&quot;&gt;显示内容1&lt;/div&gt;
+    &lt;div data-favisible=&quot;type=value2&quot;&gt;显示内容2&lt;/div&gt;
+&lt;/form&gt;</code></pre><p>JS代码</p><pre title=""><code>Form.api.bindevent($(&quot;#demo-form&quot;));</code></pre><h3 id="温馨提示-6">温馨提示</h3><p>表单中的名称必须为<code>row[组件名称]</code>，如<code>name=&quot;row[组件名称]&quot;</code><br>当元素隐藏后，表单将忽略必填验证<br>当条件逻辑表达式的操作符为<code>&gt;、&gt;=、&lt;、&lt;=</code>时，将强制把验证的值做<code>parseFloat</code>转换。<br>逻辑表达式的名称只支持<code>字母、数字、下划线</code></p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-07-31 08:12:06</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/1207.html" data-id="1207">标签输入</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/table.html" data-id="188">表格</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

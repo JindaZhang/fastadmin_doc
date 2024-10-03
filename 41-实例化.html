@@ -1,0 +1,74 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="189" data-eid="V4v5">
+        实例化    </h1>
+    
+    <p>在使用JS实例化表格之前，首先我们的HTML中必须存在一个table表格，在后台管理列表中常见的表格如：</p><pre title=""><code class="language-html">&lt;table id=&quot;table&quot; class=&quot;table table-striped table-bordered table-hover table-nowrap&quot;
+       data-operate-edit=&quot;{:$auth-&gt;check('test/edit')}&quot; 
+       data-operate-del=&quot;{:$auth-&gt;check('test/del')}&quot; 
+       width=&quot;100%&quot;&gt;
+&lt;/table&gt;</code></pre><h3 id="初始化-1">初始化</h3><p>在FastAdmin中可以使用<code>Table.api.init</code>进行表格的初始化配置操作，比如表格参数，列参数，语言包等等。</p><pre title=""><code class="language-js">// 初始化表格参数配置
+Table.api.init({
+    extend: {
+        index_url: 'test/index' + location.search,
+        add_url: 'test/add',
+        edit_url: 'test/edit',
+        del_url: 'test/del',
+        multi_url: 'test/multi',
+        table: 'test',
+    }
+});</code></pre><p>以上初始化的方法是我们在JS代码中最常看见的，我们还可以使用</p><pre title=""><code class="language-js">Table.api.init({
+    pageSize: 20, //调整分页大小为20
+    pageList: [10, 25, 50, 100, 'All'], //增加一个100的分页大小
+});</code></pre><p>等方式来修改表格的默认参数和默认列参数信息，具体可修改的参数请参考<code>表格参数</code>章节和<code>列参数</code>章节</p><p>参数中的<code>extend</code>这个参数值是非常重要的一个信息点，此参数用于配置我们加载数据列表的URL、添加文档的URL、编辑文档的URL和删除文档URL等</p><h3 id="实例化-2">实例化</h3><p>通过以上的初始化以后即可使用以下代码进行表格实例化操作了</p><pre title=""><code class="language-js">var table = $(&quot;#table&quot;);
+
+// 初始化表格
+table.bootstrapTable({
+    url: $.fn.bootstrapTable.defaults.extend.index_url,
+    pk: 'id',
+    sortName: 'weigh',
+    columns: [
+        [
+            {checkbox: true},
+            {field: 'id', title: __('Id')},
+            {field: 'category_id', title: __('Category_id')},
+            {field: 'title', title: __('Title')},
+            {field: 'image', title: __('Image'), events: Table.api.events.image, formatter: Table.api.formatter.image},
+            {field: 'images', title: __('Images'), events: Table.api.events.image, formatter: Table.api.formatter.images},
+            {field: 'refreshtime', title: __('Refreshtime'), operate:'RANGE', addclass:'datetimerange', formatter: Table.api.formatter.datetime},
+            {field: 'weigh', title: __('Weigh')},
+            {field: 'switch', title: __('Switch'), searchList: {&quot;1&quot;:__('Yes'),&quot;0&quot;:__('No')}, formatter: Table.api.formatter.toggle},
+            {field: 'status', title: __('Status'), searchList: {&quot;normal&quot;:__('Normal'),&quot;hidden&quot;:__('Hidden')}, formatter: Table.api.formatter.status},
+            {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate}
+            //更多参数请参考**列参数**文档章节
+        ]
+    ],
+    //更多参数请参考**表格参数**文档章节
+});
+
+// 为表格绑定事件
+Table.api.bindevent(table);</code></pre><p>如果你的表格只是需要单纯的将普通表格转化为<code>Bootstrap-table</code>，可以直接使用。</p><pre title=""><code class="language-js">$('#table').bootstrapTable({
+    url: 'data1.json',
+    columns: [{
+        field: 'id',
+        title: 'Item ID'
+    }, {
+        field: 'name',
+        title: 'Item Name'
+    }, {
+        field: 'price',
+        title: 'Item Price'
+    }, ]
+});</code></pre><p>的方式来渲染，无需进行<code>Table.api.init</code>和<code>Table.api.bindevent</code>操作，<code>Table.api.bindevent</code>只是扩展了工具栏、按钮组和事件绑定等信息。</p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-07-31 08:12:06</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/table.html" data-id="188">表格</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/190.html" data-id="190">表格参数</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

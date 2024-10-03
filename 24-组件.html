@@ -1,0 +1,30 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="156" data-eid="V4v5">
+        组件    </h1>
+    
+    <p>FastAdmin默认集成了多个第三方组合，如表单验证、文件上传、下拉列表、时间选择、城市选择、Selectpage，所有的组件都必须使用<code>Form.api.bindevent(&quot;form[role=form]&quot;)</code>来进行初始化，如果不进行初始化是无法对相应组件进行渲染和事件绑定，同时表单提交成功后也不会关闭当前窗口。</p><p><ul><li class='  ' data-id='177' ><a href='https://doc.fastadmin.net/doc/177.html' class='sidebar-link '>文件上传</a> </li><li class='  ' data-id='178' ><a href='https://doc.fastadmin.net/doc/178.html' class='sidebar-link '>动态下拉(SelectPage)</a> </li><li class='  ' data-id='179' ><a href='https://doc.fastadmin.net/doc/179.html' class='sidebar-link '>表单验证</a> </li><li class='  ' data-id='180' ><a href='https://doc.fastadmin.net/doc/180.html' class='sidebar-link '>城市选择</a> </li><li class='  ' data-id='181' ><a href='https://doc.fastadmin.net/doc/181.html' class='sidebar-link '>日期时间</a> </li><li class='  ' data-id='182' ><a href='https://doc.fastadmin.net/doc/182.html' class='sidebar-link '>下拉列表</a> </li><li class='  ' data-id='183' ><a href='https://doc.fastadmin.net/doc/183.html' class='sidebar-link '>附件选择</a> </li><li class='  ' data-id='184' ><a href='https://doc.fastadmin.net/doc/184.html' class='sidebar-link '>键值组件(Fieldlist)</a> </li><li class='  ' data-id='185' ><a href='https://doc.fastadmin.net/doc/185.html' class='sidebar-link '>开关组件</a> </li><li class='  ' data-id='186' ><a href='https://doc.fastadmin.net/doc/186.html' class='sidebar-link '>滑块组件</a> </li><li class='  ' data-id='187' ><a href='https://doc.fastadmin.net/doc/187.html' class='sidebar-link '>富文本编辑器</a> </li><li class='  ' data-id='736' ><a href='https://doc.fastadmin.net/doc/736.html' class='sidebar-link '>日期时间区间</a> </li><li class='  ' data-id='1206' ><a href='https://doc.fastadmin.net/doc/1206.html' class='sidebar-link '>自动完成(Autocomplete)</a> </li><li class='  ' data-id='1207' ><a href='https://doc.fastadmin.net/doc/1207.html' class='sidebar-link '>标签输入</a> </li><li class='  ' data-id='1253' ><a href='https://doc.fastadmin.net/doc/1253.html' class='sidebar-link '>动态显示(Favisible)</a> </li></ul></p><p>如果我们想单独为元素绑定事件和渲染，我们可以使用如下的代码</p><table><thead><tr><th>组件</th><th>代码</th><th>介绍</th></tr></thead><tbody><tr><td>文件上传</td><td>Form.events.plupload($("form"));</td><td>渲染并绑定form中的上传组件</td></tr><tr><td>动态下拉列表</td><td>Form.events.selectpage($("form"));</td><td>渲染并绑定form中的Selectpage组件</td></tr><tr><td>表单验证</td><td>Form.events.validator($("form"));</td><td>渲染并绑定form中的表单验证</td></tr><tr><td>城市选择</td><td>Form.events.citypicker($("form"));</td><td>渲染并绑定form中的城市选择组件</td></tr><tr><td>日期时间</td><td>Form.events.datetimepicker($("form"));</td><td>渲染并绑定form中的日期时间组件</td></tr><tr><td>下拉列表</td><td>Form.events.selectpicker($("form"));</td><td>渲染并绑定form中的Selectpicker组件</td></tr><tr><td>附件选择</td><td>Form.events.faselect($("form"));</td><td>渲染并绑定form中的选择附件组件</td></tr><tr><td>键值组件</td><td>Form.events.fieldlist($("form"));</td><td>渲染并绑定form中的键值组件</td></tr><tr><td>开关组件</td><td>Form.events.switcher($("form"));</td><td>渲染并绑定form中的开关组件</td></tr><tr><td>滑块组件</td><td>Form.events.slider($("form"));</td><td>渲染并绑定form中的滑块组件</td></tr></tbody></table><p>如果是动态生成的元素，默认是没有绑定事件的，可以使用上述的代码进行绑定事件。其中<code>$(&quot;form&quot;)</code>为所需绑定事件元素的父级元素，并不限定为必须是一个<code>form</code>，也可以是个<code>div</code>或<code>p</code>元素。</p><h3 id="参数列表-1">参数列表</h3><p><code>Form.api.bindevent</code>共有四个元素，分别如下：</p><table><thead><tr><th>名称</th><th>类型</th><th>说明</th></tr></thead><tbody><tr><td>form</td><td>string、object</td><td>元素容器，并不限定一定是个form元素，也可以是div或其它元素</td></tr><tr><td>success</td><td>function</td><td>成功后的回调，回调参数：data,ret</td></tr><tr><td>error</td><td>function</td><td>失败后的回调，回调参数：data,ret</td></tr><tr><td>submit</td><td>function</td><td>提交前的回调，回调参数：success,error</td></tr></tbody></table><h3 id="常规用法-2">常规用法</h3><pre title=""><code>Form.api.bindevent($(&quot;form&quot;), function(data,ret){
+    //成功的回调,如果返回false,将不会出现提示消息
+    //return false;
+}, function(data, ret){
+    //失败的回调,如果返回false,将不会出现提示消息
+    //return false;
+}, function(success, error){
+    //如果返回falsle,将阻止表单的提交
+    //return false;
+    //如果处理成功后我们可以使用Form.api.submit(this, success, error);再次提交表单
+});</code></pre><h3 id="单独绑定组件-3">单独绑定组件</h3><p>如果我们需要给一个文本框单独绑定一个组件，例如我们只需要给文本框绑定<code>日期时间选择组件</code>，我们可以采用下面的方式。</p><pre title=""><code>require(['form'], function(Form){
+    Form.events.datetimepicker($(&quot;#parentdiv&quot;));
+});</code></pre><p>注意这里的<code>$(&quot;#parentdiv&quot;)</code>为文本框父元素的选择对象。</p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-12-14 21:21:53</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/frontend.html" data-id="155">前端</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/177.html" data-id="177">文件上传</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

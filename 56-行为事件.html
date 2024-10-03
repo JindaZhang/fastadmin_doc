@@ -1,0 +1,18 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="174" data-eid="V4v5">
+        行为事件    </h1>
+    
+    <p><code>FastAdmin</code>中的行为支持<code>ThinkPHP5</code>的所有行为，同时<code>FastAdmin</code>自定义部分专属的行为事件，以下是所有所支持的行为事件。</p><table><thead><tr><th>标签位</th><th>描述</th><th>类型说明</th></tr></thead><tbody><tr><td>app_init</td><td>应用初始化标签位</td><td>系统</td></tr><tr><td>app_begin</td><td>应用开始标签位</td><td>系统</td></tr><tr><td>module_init</td><td>模块初始化标签位</td><td>系统</td></tr><tr><td>action_begin</td><td>控制器开始标签位</td><td>系统</td></tr><tr><td>view_filter</td><td>视图输出过滤标签位</td><td>系统</td></tr><tr><td>app_end</td><td>应用结束标签位</td><td>系统</td></tr><tr><td>log_write</td><td>日志write方法标签位</td><td>系统</td></tr><tr><td>log_write_done</td><td>日志写入完成标签位</td><td>系统</td></tr><tr><td>response_end</td><td>输出结束标签位</td><td>系统</td></tr><tr><td>response_send</td><td>响应发送标签位</td><td>系统</td></tr><tr><td>upload_after</td><td>上传成功标签位</td><td>FastAdmin</td></tr><tr><td>login_init</td><td>登录标签位</td><td>FastAdmin</td></tr><tr><td>wipecache_after</td><td>清除缓存后标签位</td><td>FastAdmin</td></tr><tr><td>admin_nologin</td><td>管理员未登录标签位</td><td>FastAdmin</td></tr><tr><td>admin_nopermission</td><td>管理员无权限标签位</td><td>FastAdmin</td></tr><tr><td>upload_config_init</td><td>上传配置标签位</td><td>FastAdmin</td></tr><tr><td>config_init</td><td>系统配置标签位</td><td>FastAdmin</td></tr></tbody></table><p>使用行为时在<code>Blog.php</code>中添加上对应的方法，FastAdmin在安装时、禁用、启用即可自动注册行为。但一定请注意在<code>Blog.php</code>中编写行为方法是使用的是驼峰式规则，例如<code>upload_after</code>，方法名则为<code>uploadAfter</code>，如果方法名使用<code>upload_after</code>则不会注册成功。</p><p>至此，<code>FastAdmin</code>插件开发所涉及到的文件和文件夹已经介绍完了，如果有疑问，请及时在群或问答社区反馈。</p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2024-09-06 19:42:36</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/173.html" data-id="173">目录结构</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/176.html" data-id="176">插件安装</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

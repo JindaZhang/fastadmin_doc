@@ -1,0 +1,20 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="182" data-eid="V4v5">
+        下拉列表    </h1>
+    
+    <p>在<code>FastAdmin</code>中集成了<code>Bootstrap-select</code>插件，可以对原有的<code>select</code>元素重新渲染，并增加相应的功能。</p><p>我们可以直接给<code>select</code>元素添加一个<code>class</code>为<code>selectpicker</code>的值即可，FastAdmin在检测到以后会自动进行渲染。</p><h3 id="常用属性-1">常用属性</h3><p>我们同时可以给<code>select</code>添加以下属性用于配置<code>selectpicker</code></p><table><thead><tr><th>属性</th><th>介绍</th><th>添加位置</th><th>示例</th></tr></thead><tbody><tr><td>data-live-search</td><td>是否启用动态搜索</td><td>select</td><td><code>&lt;select data-live-search=&quot;true&quot; ...&gt;</code></td></tr><tr><td>data-tokens</td><td>添加搜索的关键字</td><td>option</td><td><code>&lt;option data-tokens=&quot;keyword keyword2&quot; ...&gt;</code></td></tr><tr><td>data-max-options</td><td>最大可选择option的数量</td><td>select或optgroup</td><td><code>&lt;select data-max-options=&quot;2&quot;...&gt;</code></td></tr><tr><td>title</td><td>自定义默认提示语</td><td>select</td><td><code>&lt;select title=&quot;请选择相应的分类&quot; ...&gt;</code></td></tr><tr><td>title</td><td>自定义选中以后显示的文字</td><td>option</td><td><code>&lt;option title=&quot;分类1&quot; ...&gt;&lt;/option&gt;</code></td></tr><tr><td>data-style</td><td>定义样式</td><td>select</td><td><code>&lt;select data-style=&quot;btn-primary&quot; ...&gt;</code></td></tr></tbody></table><h3 id="捕获事件-2">捕获事件</h3><p>如果你希望捕获元素变更后的事件，直接给<code>select</code>绑定<code>change</code>事件即可，如下：</p><pre title=""><code class="language-js">$(document).on(&quot;change&quot;, &quot;#c-hobby&quot;, function(){
+    //变更后的回调事件
+});</code></pre><blockquote>更多的使用方法请参考：<a  href="https://www.fastadmin.net/outlink.html?url=https%3A%2F%2Fsilviomoreto.github.io%2Fbootstrap-select%2F"  target="_blank"  rel="nofollow">Selectpicker官方教程</a></blockquote>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-07-31 08:12:06</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/181.html" data-id="181">日期时间</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/183.html" data-id="183">附件选择</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

@@ -1,0 +1,66 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="166" data-eid="V4v5">
+        前台模块    </h1>
+    
+    <p>FastAdmin 主要专注于后台框架，前台模块相对比较简单，前台可以根据自己项目的需求自由发挥。</p><p>FastAdmin 前台模块包含了前台首页和前台会员中心，前台首页只是一个单页面，前台会员中心有简单的注册、登录、找回密码和个人中心等。</p><p>这里的前台指整个前台 index 模块，这里仅做部分前台功能使用介绍，如果需要查看前端开发文档，请查看前端章节的文档。</p><h2 id="前台功能模块-1">前台功能模块</h2><h3 id="首页模块-1">首页模块</h3><p>首页模块比较简单，只是一个单页。完全遵循ThinkPHP5的开发结构。你可以按需修改或移除此功能模块。</p><h3 id="会员模块-2">会员模块</h3><p>FastAdmin的前台自带一个简单的会员功能模块，可以进行会员的注册、登录、找回密码、会员中心、修改个人资料、修改密码等操作。</p><p>会员模块可用于进行前台会员功能开发时使用。此处的会员模块和API中的会员模块账号是相通的，但他们登录时是不会互相影响的，可以同时登录。</p><p>FastAdmin的会员模块有注册几个事件，我们可以在事件中自定义我们的操作。你可以按照以下的方式监听相应的事件行为。</p><pre title=""><code class="language-php">//登录成功后的事件
+Hook::add('user_login_successed', function ($user) {
+});
+//注册成功后的事件
+Hook::add('user_register_successed', function ($user) {
+});
+//会员删除后的事件
+Hook::add('user_delete_successed', function ($user) {
+});
+//会员注销后的事件
+Hook::add('user_logout_successed', function ($user) {
+});</code></pre><h2 id="流程介绍-2">流程介绍</h2><p>FastAdmin的前台模块完全遵循ThinkPHP5的开发规范，在此基础上我们在前台提供了一个类似后台的权限验证模块，我们可以方便快捷的控制我们的可访问权限。</p><h2 id="基类解析-3">基类解析</h2><h3 id="基类控制器-3">基类控制器</h3><p>前台的所有功能模块的控制器都是继承于<code>application/common/controller/Frontend.php</code>这个基类控制器。</p><p>在基类控制器中我们有定义一些基础属性和通用方法，首先我们看看基础属性。</p><pre title=""><code class="language-php">/**
+ * 布局模板
+ * @var string
+ */
+protected $layout = '';
+
+/**
+ * 无需登录的方法,同时也就不需要鉴权了
+ * @var array
+ */
+protected $noNeedLogin = [];
+
+/**
+ * 无需鉴权的方法,但需要登录
+ * @var array
+ */
+protected $noNeedRight = [];
+
+/**
+ * 权限Auth
+ * @var Auth 
+ */
+protected $auth = null;</code></pre><p>其次我们来看下基类的方法</p><pre title=""><code class="language-php">/**
+ * 加载语言文件
+ * @param string $name
+ */
+protected function loadlang($name)
+{
+}
+
+/**
+ * 渲染配置信息
+ * @param mixed $name 键名或数组
+ * @param mixed $value 值 
+ */
+protected function assignconfig($name, $value = '')
+{
+}</code></pre><p>以上的属性和方法我们都可以通过在当前控制器定义来达到覆盖的目的。</p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-12-14 22:32:08</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/168.html" data-id="168">后台模块</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/167.html" data-id="167">API 模块</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

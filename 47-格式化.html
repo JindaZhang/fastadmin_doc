@@ -1,0 +1,169 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="195" data-eid="V4v5">
+        格式化    </h1>
+    
+    <p>在表格初始化的字段列配置中我们通常可以看到以下的代码</p><pre title=""><code class="language-js">table.bootstrapTable({
+    url: $.fn.bootstrapTable.defaults.extend.index_url,
+    columns: [
+        [
+            {checkbox: true},
+            {field: 'id', title: __('Id')},
+            {field: 'type', title: __('Type'), operate: false, searchList: Config.searchList, formatter: Table.api.formatter.normal},
+            {field: 'name', title: __('Name'), align: 'left'},
+            {field: 'nickname', title: __('Nickname')},
+            {field: 'intro', title: __('Intro'), formatter: Table.api.formatter.content, class: 'autocontent', hover:true},
+            {field: 'flag', title: __('Flag'), formatter: Table.api.formatter.flag},
+            {field: 'image', title: __('Image'), operate: false, events: Table.api.events.image, formatter: Table.api.formatter.image},
+            {field: 'weigh', title: __('Weigh')},
+            {field: 'status', title: __('Status'), operate: false, formatter: Table.api.formatter.status},
+            {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate}
+        ]
+    ]
+});</code></pre><p>其中<code>formatter</code>有以下可配置的方法，用好以下的渲染方法可以让你的开发更加便捷。</p><h3 id="格式化方法-1">格式化方法</h3><table  class="table table-responsive">
+    <thead>
+    <tr>
+        <th>方法</th>
+        <th>参数</th>
+        <th>描述</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Table.api.formatter.icon</td>
+        <td>无</td>
+        <td>将字段值渲染成一个<code>Font-Awesome</code>图标</td>
+    </tr>
+    <tr>
+        <td>Table.api.formatter.image</td>
+        <td>无</td>
+        <td>将字段值渲染成一张图片</td>
+    </tr>
+    <tr>
+        <td>Table.api.formatter.images</td>
+        <td>无</td>
+        <td>将字段值渲染成多图</td>
+    </tr>
+    <tr>
+        <td>Table.api.formatter.file</td>
+        <td>无</td>
+        <td>将字段值渲染成附件下载</td>
+    </tr>
+    <tr>
+        <td>Table.api.formatter.files</td>
+        <td>无</td>
+        <td>将字段值渲染成多附件下载</td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.content</td>
+        <td>width:250, class:'autocontent', hover: true</td>
+        <td>将字段值渲染成固定宽度的文本,<code>class</code>和<code>hover</code>属性只支持FastAdmin1.4.0+版本</td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.status</td>
+        <td>custom:{"值":"颜色标签"}</td>
+        <td>将字段值渲染成状态</td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.normal</td>
+    <td>custom:{"值":"颜色标签"}<br>
+    icon:"fa fa-home"<br>
+    searchList:{"normal":"正常","hidden":"隐藏"}
+    </td>
+    <td>将字段值渲染成常规标签</td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.toggle</td>
+    <td>color:"danger", yes:"1", no:"0", url:"点击开关请求的URL", confirm: "点击切换提示语", disable:function(value, row, index){
+        //返回true表示禁用
+        return true;
+    },
+    </td>
+    <td>将字段值渲染成开关组件标签</td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.url</td>
+    <td>无</td>
+    <td>将字段值渲染成URL链接文本框，不适用于附件文件</td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.search</td>
+    <td>customField:'自定义字段'</td>
+    <td>将字段值渲染成可点击搜索的形式,此时<code>operate</code>不能为<code>false</code></td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.addtabs</td>
+    <td>atitle:'选项卡的标题'</td>
+    <td>将字段值渲染成可点击新选项卡打开的链接</td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.dialog</td>
+    <td>atitle:'选项卡的标题'</td>
+    <td>将字段值渲染成可点击弹窗打开的链接</td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.flag<br>
+    Table.api.formatter.label
+    </td>
+    <td>custom:{"值":"颜色标签"}, customField:"自定义字段", searchList:{"new":"新","hot":"热门"}
+    </td>
+    <td>将字段值渲染成可点击弹窗打开的链接</td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.datetime</td>
+    <td>datetimeFormat:'YYYY-MM-DD HH:mm:ss'</td>
+    <td>将字段值渲染成日期时间值</td>
+    </tr>
+    
+    <tr>    <td>Table.api.formatter.operate</td>
+    <td>buttons:[按钮组配置]</td>
+    <td>将字段值渲染成操作列(编辑、删除)</td>
+    </tr>
+    </tbody>
+</table><h2 id="自定义格式化方法-1">自定义格式化方法</h2><p>如果框架自带的格式化不满足的使用，可以使用自定义的格式化方法，格式如下：</p><pre title=""><code class="language-js">table.bootstrapTable({
+    url: $.fn.bootstrapTable.defaults.extend.index_url,
+    columns: [
+        [
+            {checkbox: true},
+            {field: 'id', title: __('Id')},
+            {field: 'intro', title: __('Intro'), formatter: function(value, row, index) {
+                //value：intro字段的值
+                //row：当前行所有字段的数据
+                //index：当前行索引
+                //示例：
+                return value + &quot; - &quot; + row.id;
+            }
+        ]
+    ]
+});</code></pre><h2 id="按钮组配置-2">按钮组配置</h2><p><code>buttons</code>按钮组配置支持使用数组，格式如下：</p><pre title=""><code>buttons: [
+    {
+        name: 'add', //唯一标识、权限标识
+        dropdown: '', //按钮下拉分组，默认为不分组
+        text: '同意', //按钮显示的文字，支持function
+        title: '我是标题', //按钮显示的文字，支持function
+        classname: 'btn btn-info btn-xs btn-dialog', //按钮的class，支持btn-dialog/btn-ajax/btn-addtabs
+        icon: 'fa fa-plus', //按钮的图标
+        url: 'department/index/add/parent_id/{ids}', //按钮的链接，支持使用{字段名}来占位替换，支持function
+        confirm: '是否同意该请求？', //点击按钮后的确认框，支持function
+        refresh: true, //操作完成后是否刷新列表
+        disable: function(row){}, //判断按钮是否禁用，支持function
+        visible: function(row){}, //判断按钮是否可见，支持function
+        hidden: function(row){}, //判断按钮是否隐藏，支持function
+        extend: '', //扩展的扩展属性，FastAdmin1.4.0+支持function
+    },
+    {
+        ...
+    }
+]</code></pre>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-10-17 12:05:00</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/194.html" data-id="194">事件</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/196.html" data-id="196">依赖</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

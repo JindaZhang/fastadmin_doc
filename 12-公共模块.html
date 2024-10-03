@@ -1,0 +1,118 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="169" data-eid="V4v5">
+        公共模块    </h1>
+    
+    <h2 id="Token验证-1">Token验证</h2><h3 id="功能介绍-1">功能介绍</h3><p>Token验证主要用于会员登录状态信息的维护和验证，通常情况下不需要我们调用此类的方法，在一些特殊情况下我们可以手动调用。</p><h3 id="使用示例-2">使用示例</h3><h5 id="获取Token信息-1">获取Token信息</h5><p>获取Token的详情、关联的会员ID、过期时间、有效期等信息。</p><pre title=""><code class="language-php">\app\common\library\Token::get('c2259a37-5fee-4c4b-93b0-1d7313e1d1ac');</code></pre><h5 id="设置会员的Token信息-2">设置会员的Token信息</h5><p>新增会员Token并更新，且有效期为3600秒</p><pre title=""><code class="language-php">\app\common\library\Token::set('c2259a37-5fee-4c4b-93b0-1d7313e1d1ac', 1, 3600);</code></pre><h5 id="判断会员Token是否可用-3">判断会员Token是否可用</h5><p>通过Token和会员ID来判断Token是否可以使用。</p><pre title=""><code>\app\common\library\Token::check('c2259a37-5fee-4c4b-93b0-1d7313e1d1ac', 1);</code></pre><h5 id="删除单个会员Token-4">删除单个会员Token</h5><p>删除指定的Token。</p><pre title=""><code class="language-php">\app\common\library\Token::delete('c2259a37-5fee-4c4b-93b0-1d7313e1d1ac');</code></pre><h5 id="删除指定会员的所有Token-5">删除指定会员的所有Token</h5><p>删除会员ID为1的所有Token。</p><pre title=""><code class="language-php">\app\common\library\Token::clear(1);</code></pre><h2 id="邮件发送-2">邮件发送</h2><h3 id="功能介绍-3">功能介绍</h3><p>FastAdmin中的邮件发送采用<code>phpmailer</code>进行邮件发送，在使用邮件发送功能前请先在后台常规管理-&gt;系统配置中配置好邮件的相关信息。</p><h3 id="使用示例-4">使用示例</h3><p>首先我们需要采用单例或实例化一个<code>Email</code>对象</p><pre title=""><code class="language-php">$email = new \app\common\library\Email;</code></pre><p>其次我们可以设置邮件主题正文、接收者、标题等信息，比如</p><pre title=""><code class="language-php">$email-&gt;subject('这里是邮件标题')-&gt;to('youremail@163.com')-&gt;message('这里是邮件正文')-&gt;send();</code></pre><p>如果我们邮件发送失败，想获取错误的详情，可使用。</p><pre title=""><code class="language-php">$email-&gt;getError();</code></pre><p>来获取到错误详情</p><h2 id="短信发送-3">短信发送</h2><h3 id="功能介绍-5">功能介绍</h3><p>在我们开发过程中经常会用到短信发送和短信推广的功能，FastAdmin提供了一个简单实用的短信接口供开发者调用。</p><p>在使用短信发送之前，务必在后台安装好我们短信服务商的插件，如果我们要使用的服务商未提供有FastAdmin的插件，我们则需要自己开发一个，或注册一个<code>sms_send</code>和<code>sms_check</code>的事件用于我们的发送和检测操作。</p><h3 id="使用示例-6">使用示例</h3><p>首先常用的是发送短信，比如我们发送一个注册验证码。</p><pre title=""><code class="language-php">\app\common\library\Sms::send('13888888888', '1234', 'register');</code></pre><p>发送以后我们有时需要检测验证码是否正确，则可以使用。</p><pre title=""><code class="language-php">\app\common\library\Sms::check('1388888888', '1234', 'register');</code></pre><p>当然有些时候我们还需要发送营销短信或通知，则可以使用。</p><pre title=""><code class="language-php">\app\common\library\Sms::notice('1388888888', '消息内容', 'SMS_10001');</code></pre><p>如果我们需要清空指定手机号的验证码，则可以使用。</p><pre title=""><code class="language-php">\app\common\library\Sms::flush('13888888888', 'register');</code></pre><h2 id="辅助函数-4">辅助函数</h2><p>在FastAdmin中我们有提供几个常用的辅助函数。</p><pre title=""><code class="language-php">
+/**
+ * 获取语言变量值
+ * @param string    $name 语言变量名
+ * @param array     $vars 动态变量值
+ * @param string    $lang 语言
+ * @return mixed
+ */
+function __($name, $vars = [], $lang = '')
+{
+}
+
+/**
+ * 将字节转换为可读文本
+ * @param int $size 大小
+ * @param string $delimiter 分隔符
+ * @return string
+ */
+function format_bytes($size, $delimiter = '')
+{
+}
+
+/**
+ * 将时间戳转换为日期时间
+ * @param int $time 时间戳
+ * @param string $format 日期时间格式
+ * @return string
+ */
+function datetime($time, $format = 'Y-m-d H:i:s')
+{
+}
+
+/**
+ * 获取语义化时间
+ * @param int $time 时间
+ * @param int $local 本地时间
+ * @return string
+ */
+function human_date($time, $local = null)
+{
+}
+
+/**
+ * 获取上传资源的CDN的地址
+ * @param string $url 资源相对地址
+ * @return string
+ */
+function cdnurl($url)
+{
+}
+
+/**
+ * 判断文件或文件夹是否可写
+ * @param   string $file 文件或目录
+ * @return  bool
+ */
+function is_really_writable($file)
+{
+}
+/**
+ * 删除文件夹
+ * @param string $dirname 目录
+ * @param bool $withself 是否删除自身
+ * @return boolean
+ */
+function rmdirs($dirname, $withself = true)
+{
+}
+
+/**
+ * 复制文件夹
+ * @param string $source 源文件夹
+ * @param string $dest 目标文件夹
+ */
+function copydirs($source, $dest)
+{
+}
+
+function mb_ucfirst($string)
+{
+}
+
+/**
+ * 附加关联字段数据
+ * @param array $items 数据列表
+ * @param mixed $fields 渲染的来源字段
+ * @return array
+ */
+function addtion($items, $fields)
+{
+}
+
+/**
+ * 返回打印数组结构
+ * @param string $var   数组
+ * @param string $indent 缩进字符
+ * @return string
+ */
+function var_export_short($var, $indent = &quot;&quot;)
+{
+}</code></pre>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-12-14 21:54:10</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/167.html" data-id="167">API 模块</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/command.html" data-id="148">命令行</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

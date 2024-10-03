@@ -1,0 +1,33 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="162" data-eid="V4v5">
+        一键压缩打包    </h1>
+    
+    <p>在FastAdmin中如果修改了核心的JS或CSS文件，是需要重新压缩打包后在生产环境下才会生效。FastAdmin采用的是基于<code>RequireJS</code>的<code>r.js</code>进行JS和CSS文件的压缩打包。</p><h3 id="准备工作-1">准备工作</h3><p>请先确保你的环境已经安装好Node环境。</p><p>首先确认你<code>application/config.php</code>中<code>app_debug</code>的值，当为true的时候是采用的无压缩的JS和CSS，当为false时采用的是压缩版的JS和CSS。</p><p>请确保php所在的目录已经加入到系统环境变量，否则会提示找不到该命令。</p><p>打开命令行控制台进入到你的站点根目录，也就是think文件所在的目录。</p><h3 id="常用命令-2">常用命令</h3><pre title=""><code class="language-php">//一键压缩打包前后台的JS和CSS
+php think min -m all -r all
+//一键压缩打包后台的JS和CSS
+php think min -m backend -r all
+//一键压缩打包前后台的JS
+php think min -m all -r js
+//一键压缩打包后台的CSS
+php think min -m backend -r css
+//使用uglify进行一键压缩打包后台的JS文件
+php think min -m backend -r js -o uglify</code></pre><h3 id="常见问题-3">常见问题</h3><p>Windows系统需要手动配置node的路径,请参考<a  href="https://doc.fastadmin.net/doc/faq.html#toc-20"  target="_blank">在Windows下如何压缩打包JS和CSS</a>。</p><p>如果无法进行打包，可以使用<code>php think min -m all -r all -vvv</code>尝试下，看下错误信息。</p><p>如果压缩打包后访问不生效，请检查是否是你的浏览器缓存的原因，请尝试清除浏览器缓存。</p><p>请不要直接修改以<code>.min.js</code>和<code>.min.css</code>结尾的文件，因为一键压缩打包后会进行覆盖。</p><p>安装或卸载插件后无需进行压缩打包JS和CSS</p><h3 id="影响文件-4">影响文件</h3><p>在调试模式和生产环境下所加载的JS和CSS是不一样的，压缩打包会重新生成生产环境下的JS和CSS文件，特别注意下。<br><strong>调试模式：</strong></p><pre title=""><code>public/assets/js/require-frontend.js
+public/assets/js/require-backend.js
+public/assets/css/frontend.css
+public/assets/css/backend.css</code></pre><p><strong>生产环境：</strong>(打包压缩后会重新生成以下文件)</p><pre title=""><code>public/assets/js/require-frontend.min.js
+public/assets/js/require-backend.min.js
+public/assets/css/frontend.min.css
+public/assets/css/backend.min.css</code></pre><h3 id="使用范例-5">使用范例</h3><p>JS和CSS文件压缩前和压缩后浏览器请求对比(请右键查看大图)：</p><p><img  src="https://cdn.fastadmin.net/uploads/2023/05/05/282f04748bfe7e4c70d323be9e1047b9.jpeg"  alt="JS和CSS文件压缩前和压缩后浏览器请求对比"  title="JS和CSS文件压缩前和压缩后浏览器请求对比"></p><p>更多一键生成JS和CSS的参数请使用<code>php think min --help</code>查看。</p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2023-07-31 08:12:06</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/161.html" data-id="161">一键生成菜单</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/163.html" data-id="163">一键生成API文档</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    

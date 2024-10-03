@@ -1,0 +1,67 @@
+
+
+    <div class="content with-sidebar">
+        <h1 data-id="160" data-eid="V4v5">
+        一键生成CRUD    </h1>
+    
+    <p>在FastAdmin中可以快速的一键生成CRUD，自动生成后台的控制器、模型、视图、JS、语言包、菜单、回收站等。</p><h3 id="准备工作-1">准备工作</h3><p>在数据库中默认有一个<code>fa_test</code>数据表可供参考，也可新建一个数据表，编辑好表字段结构，并且一定写上<code>字段注释</code>和<code>表注释</code>，相关数据表字段的设计要求可以参考<a  href="https://doc.fastadmin.net/docs/database.html"  target="_blank">数据库</a>章节。FastAdmin在生成CRUD时会根据<code>字段属性</code>、<code>字段注释</code>、<code>表注释</code>自动生成语言包、组件和排版。</p><div class="custom-block github-alert tip"><p class="custom-block-title">温馨提示</p><p><ol><li>请确保你设计的表有且只有一个<code>主键</code>，不支持<code>复合主键</code>。</li><li>请确保php所在的目录已经加入到系统环境变量，否则会提示找不到该命令。</li></ol></p></div><p>下面以 <code>fa_test</code> 数据表为例，打开命令行控制台进入到你的站点根目录，也就是<code>think</code>文件所在的目录，进行执行命令。</p><h3 id="常用命令-2">常用命令</h3><pre title=""><code class="language-php">//生成fa_test表的CRUD
+php think crud -t test
+//生成fa_test表的CRUD且一键生成菜单
+php think crud -t test -u 1
+//删除fa_test表生成的CRUD
+php think crud -t test -d 1
+//生成fa_test表的CRUD且控制器生成在二级目录下
+php think crud -t test -c mydir/test
+//删除fa_test表生成的二级目录的CRUD
+php think crud -t test -c mydir/test -d 1
+//生成fa_test_log表的CRUD且生成对应的控制器为testlog
+php think crud -t test_log -c testlog
+//生成fa_test表的CRUD且对应的模型名为testmodel
+php think crud -t test -m testmodel
+//生成fa_test表的CRUD且生成关联模型category，外链为category_id，关联表主键为id
+php think crud -t test -r category -k category_id -p id
+//生成fa_test表的CRUD且所有以list或data结尾的字段都生成复选框
+php think crud -t test --setcheckboxsuffix=list --setcheckboxsuffix=data
+//生成fa_test表的CRUD且所有以image和img结尾的字段都生成图片上传组件
+php think crud -t test --imagefield=image --imagefield=img
+//关联多个表,参数传递时请按顺序依次传递，支持以下几个参数relation/relationmodel/relationforeignkey/relationprimarykey/relationfields/relationmode
+php think crud -t test --relation=category --relation=admin --relationforeignkey=category_id --relationforeignkey=admin_id
+//生成v_phealth_db2数据库下的fa_test表的CRUD
+php think crud -t test --db=v_phealth_db2</code></pre><h3 id="参数介绍-3">参数介绍</h3><pre title=""><code>-t, --table=TABLE                              表名，带不带表前缀均可
+-c, --controller[=CONTROLLER]                  生成的控制器名,可选,默认根据表名进行自动解析
+-m, --model[=MODEL]                            生成的模型名,可选,默认根据表名进行自动解析
+-i, --fields[=FIELDS]                          生成的数据列表中可见的字段，默认是全部
+-f, --force[=FORCE]                            是否覆盖模式,如果目标位置已经有对应的控制器或模型会提示
+-l, --local[=LOCAL]                            是否本地模型,默认1,置为0时,模型将生成在common模块下
+-r, --relation[=RELATION]                      关联模型表名，带不带表前缀均可
+-e, --relationmodel[=RELATIONMODEL]            生成的关联模型名,可选,默认根据表名进行自动解析
+-k, --relationforeignkey[=RELATIONFOREIGNKEY]  表外键,可选,默认会识别为使用 模型_id 名称
+-p, --relationprimarykey[=RELATIONPRIMARYKEY]  关联模型表主键,可选,默认会自动识别
+-s, --relationfields[=RELATIONFIELDS]          关联模型表显示的字段，默认是全部
+-o, --relationmode[=RELATIONMODE]              关联模型,hasone/belongsto/hasmany [default: &quot;belongsto&quot;]（v1.3+ 增加了 hasmany）
+-d, --delete[=DELETE]                          删除模式,将删除之前使用CRUD命令生成的相关文件
+-u, --menu[=MENU]                              菜单模式,生成CRUD后将继续一键生成菜单
+--db[=key]                                     多数据库支持(参数为tp5中配置的数据库key 在application\config.php添加数据库配置信息)
+--setcheckboxsuffix[=SETCHECKBOXSUFFIX]    自动生成复选框的字段后缀
+--enumradiosuffix[=ENUMRADIOSUFFIX]        自动生成单选框的字段后缀
+--imagefield[=IMAGEFIELD]                  自动生成图片上传组件的字段后缀
+--filefield[=FILEFIELD]                    自动生成文件上传组件的字段后缀
+--intdatesuffix[=INTDATESUFFIX]            自动生成日期组件的字段后缀
+--switchsuffix[=SWITCHSUFFIX]              自动生成可选组件的字段后缀
+--citysuffix[=CITYSUFFIX]                  自动生成城市选择组件的字段后缀
+--selectpagesuffix[=SELECTPAGESUFFIX]      自动生成Selectpage组件的字段后缀
+--ignorefields[=IGNOREFIELDS]                 排除的字段
+--editorclass[=EDITORCLASS]                自动生成富文本组件的字段后缀
+--headingfilterfield[=HEADINGFILTERFIELD]  自动生成筛选过滤选项卡的字段，默认是status字段
+--sortfield[=SORTFIELD]                    排序字段</code></pre><h3 id="常见问题-4">常见问题</h3><ol><li>如果你的表带有下划级会自动生成带层级的控制器和视图，如果你不希望生成带层级的控制器和视图，请使用-c 参数，例如：<code>php think crud -t test_log -c testlog</code>将会生成testlog这个控制器，同理如果你的普通表想生成带层级的控制器则可以使用<code>php think crud -t test -c mydir/test</code> 。</li><li>FastAdmin自带一个<code>fa_test</code>表用于测试CRUD能支持的字段名称和类型，请直接使用<code>php think crud -t test</code>生成查看。</li><li>生成CRUD后，关联表外键在列表未显示对应的关联表数据信息，此时建议你使用在线命令行插件进行可视化生成。</li><li>生成CRUD后，在添加或编辑时外键字段未能正确显示关联表数据列表，请查看数据库章节常见问题中的说明。</li><li>如果需要生成回收站，请务必保证你的表中存在<code>deletetime</code>字段，且默认值必须为<code>null</code>，这样在一键CRUD时将自动生成回收站的功能，如果<code>deletetime</code>默认值为<code>0</code>，数据将默认进入回收站。</li><li>不可以对<code>fa_user/fa_auth_rule/fa_auth_group/fa_auth_group_access/fa_admin/fa_admin_log/fa_admin/fa_user_group/fa_user_rule</code>等框架核心表进行CRUD，否则原有的框架后台功能将无法正常使用。</li><li>默认的<code>category_id</code>字段，会将表名做为筛选条件，如对<code>fa_test</code>表做<code>CRUD</code>，则类型为<code>test</code>，如对<code>fa_test_copy</code>做<code>CRUD</code>，则类型为<code>test_copy</code>，务必前往<code>常规管理</code>-&gt;<code>系统配置</code>-&gt;<code>字典配置</code>-&gt;<code>分类类型</code>中添加上对应的类型，然后再到<code>分类管理</code>录入数据后才会生效，否则在<code>Selectpage</code>下拉时会为空。</li><li>如果编辑时始终显示相同的数据，请检查你的数据表是否有使用复合主键，目前CRUD不支持复合主键。</li><li>当设定数据库字段不能为<code>NULL</code>时，表单会自动追加必选<code>required</code>验证。</li></ol><p>更多CRUD一键生成可使用的参数请使用<code>php think crud --help</code>查看。</p>
+    <div class="date text-muted" style="margin-top:10px;">文档最后更新时间：2024-08-22 17:25:49</div>
+    <div class="copyrights text-muted" style="margin-top:10px;">著作权归应用插件开发者所有，未经许可，禁止转载、复制此文档的任何内容。</div>
+
+        <div class="docs-links">
+        <!--@formatter:off-->
+                    <span>← <a href="https://doc.fastadmin.net/doc/command.html" data-id="148">命令行</a></span>
+                        <span style="float:right"><a href="https://doc.fastadmin.net/doc/161.html" data-id="161">一键生成菜单</a> →</span>
+                    <!--@formatter:on-->
+    </div>
+    
+    
